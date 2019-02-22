@@ -15,7 +15,7 @@ const token = process.env.TOKEN;
 //When bot ready
 bot.on('ready', ()=>{
     console.log(`${bot.user.username} is ready for action!`);
-    bot.user.setActivity("bloectasy's sexy body",{type:"Watching"});
+    bot.user.setActivity("Prefix - $",{type:"Playing"});
 
 //load commands
 bot.commands = new Discord.Collection();
