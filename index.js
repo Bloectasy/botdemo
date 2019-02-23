@@ -49,23 +49,12 @@ bot.on("message", async message => {
     let args = messageArray.slice(1);
 
     if (message.content.includes(message.mentions.users.first())) {
-        bot.afk.forEach(key => {
-          if (key.id == message.mentions.users.first().id) {
-            message.guild.fetchMember(key.id).then(member => {
-              let user_tag = member.user.tag;
-              return message.channel.send(`**${user_tag}** is currently afk. Reason: ${key.reason}`);
-            });
-          }
-        });
-      }
-    
-
-    bot.afk.forEach(key => {
-        if (message.author.id == key.id) {
-            bot.afk.delete(message.author.id);
-            return message.reply(`you have been removed from the afk list!`).then(msg => msg.delete(5000));
-        }
-    });
+      let mentioned = bot.afk.get(message.mentions.users.first().id);
+      if (mentioned) message.channel.send(`**${mentioned.usertag}** is currently afk. Reason: ${mentioned.reason}`);
+    }
+    let afkcheck = bot.afk.get(message.author.id);
+    if (afkcheck) return [bot.afk.delete(message.author.id), message.reply(`you have been removed from the afk list!`).then(msg => msg.delete(5000))];
+  
 
     if (!command.startsWith(prefix)) return;
     let cmd = bot.commands.get(command.slice(prefix.length));
