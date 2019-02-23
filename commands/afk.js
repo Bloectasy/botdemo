@@ -6,6 +6,7 @@ module.exports.run = async (bot, message, args) => {
     if (!afklist) {
         let construct = {
             id: message.author.id,
+            usertag: message.author.tag,
             reason: reason
         };
 
