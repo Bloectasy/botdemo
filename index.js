@@ -5,6 +5,9 @@ const config = require("./config.json");
 require('dotenv/config');
 const http = require('http');
 const port = process.env.PORT || 3000;
+let xp = require("./xp.json");
+let cooldown = new Set();
+let cdseconds = 5;
 //The server
 http.createServer().listen(port);
 
@@ -68,7 +71,44 @@ bot.on("message", async message => {
     let cmd = bot.commands.get(command.slice(prefix.length));
     if(cmd) cmd.run(bot ,message, args);
 
-    
+    let xpAdd = Math.floor(Math.random() * 7) + 8;
+  console.log(xpAdd);
+
+  if(!xp[message.author.id]){
+    xp[message.author.id] = {
+      xp: 0,
+      level: 1
+    };
+  }
+
+  let curxp = xp[message.author.id].xp;
+  let curlvl = xp[message.author.id].level;
+  let nxtLvl = xp[message.author.id].level * 456;
+  xp[message.author.id].xp =  curxp + xpAdd;
+  if(nxtLvl <= xp[message.author.id].xp){
+    xp[message.author.id].level = curlvl + 1;
+    let lvlup = new Discord.RichEmbed()
+    .setTitle("Level Up!")
+    .setColor('RANDOM')
+    .addField("New Level", curlvl + 1);
+
+    message.channel.send(lvlup).then(msg => {msg.delete(5000)});
+  }
+  fs.writeFile("./xp.json", JSON.stringify(xp), (err) => {
+    if(err) console.log(err)
+  });  
+  if (!message.content.startsWith(prefix)) return;
+  if(cooldown.has(message.author.id)){
+    message.delete();
+    return message.reply("You have to wait 5 seconds through commands.")
+  }
+  if(!message.member.hasPermission("ADMINISTRATOR")){
+
+  }
+
+  setTimeout(() => {
+    cooldown.delete(message.author.id)
+  }, cdseconds * 1000)
 
 
 });
