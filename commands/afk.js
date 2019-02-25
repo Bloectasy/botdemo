@@ -11,7 +11,7 @@ module.exports.run = async (bot, message, args) => {
         };
 
         bot.afk.set(message.author.id, construct);
-        return message.reply(`you have been set to afk for reason: ${reason}`)
+        return message.reply(`you have been set to afk for reason: ${reason}`).then(msg => msg.delete(5000));
     }
 
 };
