@@ -11,11 +11,7 @@ module.exports.run = async (bot, message, args) => {
         };
 
         bot.afk.set(message.author.id, construct);
-        return = new discord.RichEmbed()
-        .color('RANDOM')
-        .setThumbnail(target.user.avatarURL)
-        .addField(message.reply`you have been set to afk for reason ${reason}`)
-        .setFooter('Do not ping again cause it is annoying');
+        return setFooter('Report user information', target.user.displayAvatarURL);
         
     }
 
