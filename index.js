@@ -38,7 +38,7 @@ fs.readdir("./commands", (err, files) => {
 
 })
 //when idk this thing xD
-bot.away = new Map();
+bot.afk = new Map();
 bot.on("message", async message => {
     if (message.author.bot) return;
     if (message.channel.type === "dm") return;
@@ -49,11 +49,11 @@ bot.on("message", async message => {
     let args = messageArray.slice(1);
 
     if (message.content.includes(message.mentions.users.first())) {
-      let mentioned = bot.away.get(message.mentions.users.first().id);
-      if (mentioned) message.channel.send(`**${mentioned.usertag}** is currently away. Reason: ${mentioned.reason}`);
+      let mentioned = bot.afk.get(message.mentions.users.first().id);
+      if (mentioned) message.channel.send(`**${mentioned.usertag}** is currently afk. Reason: ${mentioned.reason}`);
     }
-    let awaycheck = bot.away.get(message.author.id);
-    if (awaycheck) return [bot.away.delete(message.author.id), message.reply(`you have been removed from the away list!`).then(msg => msg.delete(5000))];
+    let afkcheck = bot.afk.get(message.author.id);
+    if (afkcheck) return [bot.afk.delete(message.author.id), message.reply(`you have been removed from the afk list!`).then(msg => msg.delete(5000))];
   
 
     if (!command.startsWith(prefix)) return;
