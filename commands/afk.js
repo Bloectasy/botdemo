@@ -1,21 +1,21 @@
 module.exports.run = async (bot, message, args) => {
 
-    let reason = args.join(' ') ? args.join(' ') : 'I am currently afk, I will reply as soon possible.';
-    let afklist = bot.afk.get(message.author.id);
+    let reason = args.join(' ') ? args.join(' ') : author.username + 'is currently away';
+    let awaylist = bot.away.get(message.author.id);
 
-    if (!afklist) {
+    if (!awaylist) {
         let construct = {
             id: message.author.id,
             usertag: message.author.tag,
             reason: reason
         };
 
-        bot.afk.set(message.author.id, construct);
-        return message.reply(`you have been set to afk for reason: ${reason}`).then(msg => msg.delete(5000));
+        bot.away.set(message.author.id, construct);
+        return message.reply(`you have been set to away for reason: ${reason}`)
     }
 
 };
 
 module.exports.help = {
-    name: 'afk'
+    name: 'away'
 };
