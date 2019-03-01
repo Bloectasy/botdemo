@@ -11,7 +11,7 @@ module.exports.run = async (bot, message, args) => {
         };
 
         bot.afk.set(message.author.id, construct);
-        return setFooter('Report user information', target.user.displayAvatarURL);
+        return message.reply(`you have been set to afk for reason: ${reason}`)
         
     }
 
