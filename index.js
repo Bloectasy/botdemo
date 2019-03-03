@@ -53,7 +53,7 @@ bot.on("message", async message => {
       if (mentioned) message.channel.send(`**${mentioned.usertag}** is currently afk. Reason: ${mentioned.reason}`);
     }
     let afkcheck = bot.afk.get(message.author.id);
-    if (afkcheck) return [bot.afk.delete(message.author.id), message.reply(`you have been removed from the afk list!`).then(msg => msg.delete(5000))];
+    if (afkcheck) return [bot.afk.delete(message.author.id), message.reply(`you have been removed from the afk list!`)]
   
 
     if (!command.startsWith(prefix)) return;
