@@ -7,7 +7,7 @@ module.exports.run = async (bot , message, args) => {
     let help = new discord.RichEmbed()
 
     .setColor('RANDOM')
-    .addField("This bot is created by Bloectasy#1442.", "And he is cool.", true/false )
+    .addField("This bot is created by Bloectasy#6969.", "And he is cool.", true/false )
     .addField("This bot currently has 6 commands which are the following:", "Afk,Report,Level,Ban and Kick", true/false)
     .addField("Afk: Which sets you as afk so people know that you are away when they mention you.","Usage of Afk: $afk [reason]", true/false)
     .addField("Report: This is a command if you want to report someone and one of the online staff member will get notified and will get to you as fast as possible.","Usage of Report: $report [@person] [reason]", true/false)
